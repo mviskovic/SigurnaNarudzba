@@ -1,6 +1,6 @@
 -install ganache
 
--start ganache copy private key of the account you wanna interact with
+-start ganache, copy private key of the account you wanna interact with
 
 -start MetaMask
 
