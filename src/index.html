@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Sigurna narudžba</title>
+    <link href="vendor/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+
+
+    <style>
+      .appNarudzba {
+        background-color: #44d6ed;
+      }
+      .title::after {
+        content:'';
+        background: url("/images/blockchain-app-development.png") no-repeat;
+        background-size: contain;
+        width: 30px;
+
+      }
+      main {
+        margin-top: 60px;
+      }
+
+      #content {
+        display: none;
+      }
+
+      .sadrzajNarudzbe {
+        min-width: 500px;
+        width: fit-content;
+      }
+
+      .mainContainer {
+        margin-top: 5%;
+      }
+
+      ul {
+        margin-bottom: 0px;
+      }
+
+      input[type=number] {
+        width: 150px;
+        height: 50px;
+        font-weight: bold;
+      }
+
+      input[type=text] {
+        width: 550px;
+        height: 50px;
+        font-weight: bold;
+      }
+
+      input[type=submit] {
+        width: 150px;
+        height: 50px;
+        font-weight: bold;
+      }
+
+      .content {
+        font-size: 18px;
+        word-break: break-word;
+      }
+
+      #narudzbuZavrsena .content {
+        color: grey;
+        text-decoration: line-through;
+        font-size: 18px;
+      }
+    </style>
+  </head>
+  <body class="appNarudzba">
+    <nav class="navbar navbar-default fixed-top bg-info flex-md-nowrap p-0 shadow">
+      <a class="navbar-brand col-12 d-flex justify-content-center title"><strong>Sigurna narudžba</strong></a>
+      <ul class="navbar-nav px-3">
+        <li class="nav-item text-nowrap d-none d-sm-none d-sm-block">
+          <span id="account"></span>
+        </li>
+      </ul>
+    </nav>
+    <div class="container-fluid">
+      <div class="row">
+        <main role="main" class="col-lg-12 d-flex justify-content-center">
+          <div id="loader" class="text-center">
+            <p class="text-center">Updating orders</p>
+          </div>
+          <div id="content">
+            <form onSubmit="App.kreirajNarudzbu(); return false;">
+                    <input id="brojStola" type="number" class="brojStola" placeholder="Table number" required>
+                    <input id="sadrzajNarudzbe" type="text" class="sadrzajNarudzbe" placeholder="Order description" required>
+                    <input type="submit" value="Enter order">
+            </form> 
+          </div>
+        </div>
+        <div class="mainContainer container justify-content-center">
+            <div class="row">
+          <ul id="postaviNarudzbu" class="list-unstyled col-sm">
+              <div class="buttonContainer" class="checkbox" style="display: none">
+                <label>
+                  <input type="submit" name="Place Order"/>
+                  <span class="content"></span>
+                </label>
+              </div>
+          </ul>
+          
+
+          <ul id="zaprimiNarudzbu" class="list-unstyled col-sm">
+              <div class="buttonContainer2" class="checkbox" style="display: none">
+                <label>
+                  <input type="submit" value="Order served"/>
+                  <span class="content"></span>
+                </label>
+              </div>
+            </ul>
+
+            <ul id="narudzbuZavrsena" class="list-unstyled col-sm">
+              <div class="buttonContainer3" class="checkbox" style="display: none">
+                <label>
+                  <input type="submit" value="Finished"/>
+                  <span class="content"></span>
+                </label>
+              </div>
+            </ul>
+            </div>
+        </div>
+            
+        </main>
+      </div>
+    
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="vendor/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="vendor/truffle-contract/dist/truffle-contract.js"></script>
+    <script src="app.js"></script>
+  </body>
+</html>
