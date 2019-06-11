@@ -43,42 +43,42 @@ App = {
   
    
     loadAccount: async () => {
-        // Set the current blockchain account
+        // odredujemo koji blockchaing account cemo koristiti
         App.account = web3.eth.accounts[0];
     },
 
     loadContract: async () => {
-        // Create a JavaScript version of the smart contract
+        // dohvacamo podatke iz jsona i pretvaramo trufle u javascript da bi mogli izvrsiti funkcije nad njime
         const novaNarudzba = await $.getJSON('SigurnaNarudzba.json')
         App.contracts.Narudzba = TruffleContract(novaNarudzba)
         App.contracts.Narudzba.setProvider(App.web3Provider)
 
-        // Hydrate the smart contract with values from the blockchain
+        // posto je ugovor live spaja se na blockchain i povlaci podatke
         App.novaNarudzba = await App.contracts.Narudzba.deployed()
     },
 
     render: async () => {
-        // Prevent double render
+        // prepoznaje dali se render ucitava ->
         if(App.loading) {
             return
         }
-        // Update app loading state
+        // oznacuj da se app ucitava i prestaje zvati gornju funkciju
         App.setLoading(true)
 
-        // Render Account
+        // Render account (hash)
         $('#account').html(App.account)
 
-        // Render Tasks
+        // Render narudzbu (renderNarudzba donja funkcija)
         await App.renderNarudzba()
 
-        // Update loading state
         App.setLoading(false)
     },
 
     renderNarudzba: async () => {
+        //ucitava broj kreiranih narudzbi
         const brojacNarudzbi = await App.novaNarudzba.brojacNarudzbi()
         const $buttonContainer = $('.buttonContainer')
-
+        //ispisivanje svih narudzbi koje prepoznaje po id-u i
         for(var i = 1; i <= brojacNarudzbi; i++) {
             const narudzba = await App.novaNarudzba.narudzbe(i)
             const narudzbaId = narudzba[0].toNumber()
